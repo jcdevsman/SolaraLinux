@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solara / Ubuntu based</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0c0b0f;
+    --surface: #13111a;
+    --text: rgba(255,255,255,0.88);
+    --muted: rgba(255,255,255,0.38);
+    --dim: rgba(255,255,255,0.18);
+    --glass-bg: rgba(255,255,255,0.055);
+    --glass-border: rgba(255,255,255,0.1);
+    --glass-shine: rgba(255,255,255,0.07);
+    --accent: #c9bfff;
+    --accent2: #9fc8e8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px) saturate(1.6);
+    -webkit-backdrop-filter: blur(24px) saturate(1.6);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.4), inset 0 1px 0 var(--glass-shine);
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 24px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 100; border-radius: 100px;
+    padding: 12px 28px;
+    display: flex; align-items: center; gap: 40px;
+    animation: slideDown 0.8s cubic-bezier(0.16,1,0.3,1) both;
+    white-space: nowrap;
+  }
+  @keyframes slideDown { from{opacity:0;transform:translateX(-50%) translateY(-20px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+
+  .nav-logo { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:300; letter-spacing:0.08em; color:var(--text); text-decoration:none; }
+  .nav-links { display:flex; gap:28px; }
+  .nav-links a { font-size:13px; color:var(--muted); text-decoration:none; letter-spacing:0.04em; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--text); }
+  .nav-cta { font-size:13px; font-weight:500; color:var(--text); text-decoration:none; padding:8px 18px; border-radius:100px; border:1px solid rgba(255,255,255,0.18); transition:background 0.2s; }
+  .nav-cta:hover { background:rgba(255,255,255,0.08); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 24px 100px;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 90% 65% at 50% -5%, rgba(80,55,145,0.7) 0%, transparent 55%),
+      radial-gradient(ellipse 55% 45% at 10% 50%, rgba(30,70,120,0.35) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 55% at 90% 30%, rgba(100,50,90,0.3) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 30% at 55% 75%, rgba(40,90,80,0.18) 0%, transparent 50%),
+      #08060f;
+  }
+
+  .hero-bg::after {
+    content:'';
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(1px 1px at 8% 6%, rgba(255,255,255,0.75) 0%,transparent 100%),
+      radial-gradient(1px 1px at 19% 11%, rgba(255,255,255,0.55) 0%,transparent 100%),
+      radial-gradient(1.5px 1.5px at 34% 4%, rgba(255,255,255,0.65) 0%,transparent 100%),
+      radial-gradient(1px 1px at 52% 9%, rgba(255,255,255,0.5) 0%,transparent 100%),
+      radial-gradient(1px 1px at 67% 3%, rgba(255,255,255,0.6) 0%,transparent 100%),
+      radial-gradient(1px 1px at 80% 14%, rgba(255,255,255,0.45) 0%,transparent 100%),
+      radial-gradient(1.5px 1.5px at 93% 8%, rgba(255,255,255,0.7) 0%,transparent 100%),
+      radial-gradient(1px 1px at 4% 28%, rgba(255,255,255,0.5) 0%,transparent 100%),
+      radial-gradient(1px 1px at 25% 22%, rgba(220,210,255,0.6) 0%,transparent 100%),
+      radial-gradient(1px 1px at 45% 19%, rgba(255,255,255,0.4) 0%,transparent 100%),
+      radial-gradient(1px 1px at 72% 25%, rgba(255,255,255,0.55) 0%,transparent 100%),
+      radial-gradient(1.5px 1.5px at 88% 31%, rgba(180,210,255,0.5) 0%,transparent 100%),
+      radial-gradient(1px 1px at 14% 42%, rgba(255,255,255,0.35) 0%,transparent 100%),
+      radial-gradient(1px 1px at 38% 37%, rgba(255,255,255,0.5) 0%,transparent 100%),
+      radial-gradient(1px 1px at 60% 44%, rgba(255,255,255,0.4) 0%,transparent 100%),
+      radial-gradient(2px 2px at 78% 48%, rgba(255,255,255,0.3) 0%,transparent 100%),
+      radial-gradient(1px 1px at 96% 55%, rgba(200,190,255,0.45) 0%,transparent 100%),
+      radial-gradient(1px 1px at 22% 60%, rgba(255,255,255,0.35) 0%,transparent 100%),
+      radial-gradient(1.5px 1.5px at 50% 65%, rgba(255,255,255,0.55) 0%,transparent 100%),
+      radial-gradient(1px 1px at 84% 70%, rgba(255,255,255,0.4) 0%,transparent 100%);
+  }
+
+  .blob { position:absolute; border-radius:50%; pointer-events:none; }
+  .blob-1 { width:700px;height:500px; background:radial-gradient(ellipse,rgba(95,65,185,0.32) 0%,transparent 70%); top:-150px;left:-80px; filter:blur(70px); animation:drift1 22s ease-in-out infinite; }
+  .blob-2 { width:600px;height:600px; background:radial-gradient(ellipse,rgba(35,95,165,0.24) 0%,transparent 70%); top:-60px;right:-100px; filter:blur(80px); animation:drift2 28s ease-in-out infinite; }
+  .blob-3 { width:500px;height:400px; background:radial-gradient(ellipse,rgba(155,75,115,0.2) 0%,transparent 70%); top:25%;left:25%; filter:blur(90px); animation:drift3 19s ease-in-out infinite; }
+
+  @keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(50px,35px)} }
+  @keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-35px,50px)} }
+  @keyframes drift3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(25px,-35px)} }
+
+  .hero-fade { position:absolute; bottom:0;left:0;right:0; height:200px; background:linear-gradient(to bottom,transparent,var(--bg)); z-index:1; }
+  .hero > *:not(.hero-bg):not(.hero-fade) { position:relative; z-index:2; }
+
+  .hero-label { font-size:11px;font-weight:500;letter-spacing:0.22em;color:var(--muted);text-transform:uppercase;margin-bottom:32px;opacity:0;animation:fadeUp 0.8s 0.3s cubic-bezier(0.16,1,0.3,1) forwards; }
+  .hero-title { font-family:'Cormorant Garamond',serif;font-size:clamp(56px,10vw,116px);font-weight:300;line-height:0.93;letter-spacing:-0.02em;color:var(--text);max-width:900px;margin-bottom:32px;opacity:0;animation:fadeUp 0.9s 0.45s cubic-bezier(0.16,1,0.3,1) forwards; }
+  .hero-title em { font-style:italic; background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hero-sub { font-size:16px;font-weight:300;color:var(--muted);max-width:400px;line-height:1.75;margin-bottom:52px;opacity:0;animation:fadeUp 0.9s 0.6s cubic-bezier(0.16,1,0.3,1) forwards; }
+  .hero-actions { display:flex;gap:16px;align-items:center;opacity:0;animation:fadeUp 0.9s 0.75s cubic-bezier(0.16,1,0.3,1) forwards; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+  .btn-primary { display:inline-flex;align-items:center;gap:8px;padding:14px 30px;border-radius:100px;background:rgba(255,255,255,0.92);color:#0c0b0f;font-size:14px;font-weight:500;letter-spacing:0.02em;text-decoration:none;transition:opacity 0.2s,transform 0.2s; }
+  .btn-primary:hover { opacity:0.88;transform:translateY(-1px); }
+
+  /* stats card */
+  .hero-card { margin-top:72px;border-radius:24px;padding:36px 48px;display:flex;gap:48px;align-items:center;max-width:680px;width:100%;opacity:0;animation:fadeUp 1s 1s cubic-bezier(0.16,1,0.3,1) forwards; }
+  .stat { text-align:center;flex:1; }
+  .stat-num { font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:var(--text);line-height:1;margin-bottom:6px; }
+  .stat-label { font-size:11px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase; }
+  .stat-divider { width:1px;height:44px;background:var(--dim);flex-shrink:0; }
+
+  /* sections */
+  section { position:relative;z-index:1;padding:120px 24px;background:var(--bg); }
+  .container { max-width:1100px;margin:0 auto; }
+  .section-label { font-size:11px;font-weight:500;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;margin-bottom:20px; }
+
+  /* features */
+  .features-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:16px; }
+  .feature-card { border-radius:20px;padding:36px 32px;transition:transform 0.3s cubic-bezier(0.16,1,0.3,1),border-color 0.3s; }
+  .feature-card:hover { transform:translateY(-5px);border-color:rgba(255,255,255,0.18); }
+  .feature-icon { width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:24px;font-size:16px;color:var(--muted); }
+  .feature-title { font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--text);margin-bottom:12px; }
+  .feature-text { font-size:14px;font-weight:300;color:var(--muted);line-height:1.75; }
+
+  /* quote */
+  .quote-strip { position:relative;z-index:1;padding:100px 24px;background:var(--surface);border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);overflow:hidden; }
+  .quote-strip::before { content:'';position:absolute;width:600px;height:400px;background:radial-gradient(ellipse,rgba(95,65,185,0.12) 0%,transparent 70%);top:-100px;right:5%;pointer-events:none; }
+  .quote-text { font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,50px);font-weight:300;font-style:italic;color:rgba(255,255,255,0.75);line-height:1.25;margin-bottom:28px;max-width:800px; }
+  .quote-author { font-size:13px;color:var(--muted);letter-spacing:0.08em; }
+
+  /* CTA */
+  .cta-section {
+    position: relative; z-index: 1;
+    padding: 140px 24px 160px;
+    text-align: center;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    width: 900px; height: 500px;
+    background: radial-gradient(ellipse, rgba(95,65,185,0.16) 0%, transparent 65%);
+    top: -80px; left: 50%; transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(44px, 8vw, 90px);
+    font-weight: 300; line-height: 1;
+    color: var(--text);
+    margin-bottom: 56px;
+  }
+  .cta-title em {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  /* Row: button + image side by side */
+  .cta-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  /* Gradient download button */
+  .btn-gradient {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 18px 44px;
+    border-radius: 100px;
+    background: linear-gradient(135deg, #a78bfa 0%, #7ab8e8 100%);
+    color: #0c0b0f;
+    font-size: 16px; font-weight: 500;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.25s;
+    box-shadow: 0 0 36px rgba(167,139,250,0.4), 0 4px 20px rgba(0,0,0,0.35);
+    flex-shrink: 0;
+  }
+  .btn-gradient::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #c4b5fd 0%, #bae0f7 100%);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .btn-gradient:hover { transform: translateY(-3px); box-shadow: 0 0 56px rgba(167,139,250,0.55), 0 10px 36px rgba(0,0,0,0.3); }
+  .btn-gradient:hover::before { opacity: 1; }
+  .btn-gradient span { position: relative; z-index: 1; }
+
+  /* Preview image */
+  .cta-image {
+    width: 480px;
+    max-width: 100%;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(167,139,250,0.12);
+    object-fit: cover;
+    display: block;
+  }
+
+  /* footer */
+  footer { position:relative;z-index:1;padding:40px 24px;border-top:1px solid rgba(255,255,255,0.07);display:flex;justify-content:space-between;align-items:center;background:var(--bg); }
+  .footer-logo { font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;color:var(--text);letter-spacing:0.04em; }
+  .footer-copy { font-size:12px;color:var(--muted); }
+  .footer-links { display:flex;gap:24px; }
+  .footer-links a { font-size:12px;color:var(--muted);text-decoration:none;transition:color 0.2s; }
+  .footer-links a:hover { color:var(--text); }
+
+  /* reveal */
+  .reveal { opacity:0;transform:translateY(28px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .reveal.visible { opacity:1;transform:none; }
+</style>
+</head>
+<body>
+
+<nav class="glass">
+  <a href="#" class="nav-logo">Solara</a>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#quote">Reviews</a>
+    <a href="#download">Download</a>
+  </div>
+  <a href="https://github.com/torvalds/linux/releases/download/v6.8/linux-6.8.tar.gz" download class="nav-cta">↓ Download</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div class="hero-fade"></div>
+
+  <p class="hero-label">Ubuntu Based · Est. 2024</p>
+  <h1 class="hero-title">Smooth, Minimal,<br><em>Efficient</em></h1>
+  <p class="hero-sub">A minimal approach to digital craft — where intention and restraint create space for what matters.</p>
+  <div class="hero-actions">
+    <a href="https://github.com/torvalds/linux/releases/download/v6.8/linux-6.8.tar.gz" download class="btn-primary">↓ Download</a>
+  </div>
+  <div class="hero-card glass">
+    <div class="stat"><div class="stat-num">48</div><div class="stat-label">Projects</div></div>
+    <div class="stat-divider"></div>
+    <div class="stat"><div class="stat-num">12</div><div class="stat-label">Awards</div></div>
+    <div class="stat-divider"></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">Years</div></div>
+    <div class="stat-divider"></div>
+    <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Pixels</div></div>
+  </div>
+</div>
+
+<section id="features">
+  <div class="container">
+    <p class="section-label reveal">Solara</p>
+    <h2 class="section-label reveal" style="font-size:clamp(38px,5vw,60px);font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--text);letter-spacing:normal;text-transform:none;margin-bottom:72px;line-height:1.05"><em style="font-style:italic;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Features</em></h2>
+    <div class="features-grid">
+      <div class="feature-card glass reveal"><div class="feature-icon">◻</div><h3 class="feature-title">Smooth</h3><p class="feature-text">Fluid animations and buttery transitions throughout the entire desktop experience.</p></div>
+      <div class="feature-card glass reveal" style="transition-delay:0.1s"><div class="feature-icon">◈</div><h3 class="feature-title">Minimal</h3><p class="feature-text">Interactions that feel inevitable. Every element earns its place on the screen.</p></div>
+      <div class="feature-card glass reveal" style="transition-delay:0.2s"><div class="feature-icon">◇</div><h3 class="feature-title">Efficient</h3><p class="feature-text">Built on Ubuntu for rock-solid stability with a lightweight footprint that stays out of your way.</p></div>
+    </div>
+  </div>
+</section>
+
+<div id="quote" class="quote-strip">
+  <div class="container">
+    <p class="quote-text">"Really cool man"</p>
+    <p class="quote-author">— Julian</p>
+    <br>
+    <p class="quote-text">"Beep boop beep"</p>
+    <p class="quote-author">— Random robot</p>
+  </div>
+</div>
+
+<!-- CTA / DOWNLOAD -->
+<div id="download" class="cta-section">
+  <h2 class="cta-title reveal">Ready to <em>dive in?</em></h2>
+  <div class="cta-row reveal">
+    <a href="https://github.com/torvalds/linux/releases/download/v6.8/linux-6.8.tar.gz" download class="btn-gradient">
+      <span>↓ Download Solara</span>
+    </a>
+    <img src="Image.png" alt="oof... didn't load bud sorry" class="cta-image">
+  </div>
+</div>
+
+<footer>
+  <span class="footer-logo">Solara — A fast, workspace-centred OS built on Ubuntu</span>
+  <div class="footer-links"><a href="#">Twitter</a><a href="#">Instagram</a><a href="#">GitHub</a></div>
+  <span class="footer-copy">AI Helped made the website ONLY. Not the OS</span>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(
+  entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }),
+  { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+);
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
